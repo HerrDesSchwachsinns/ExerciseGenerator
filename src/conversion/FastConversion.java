@@ -10,7 +10,6 @@ import static util.IterableUtils.counter;
 import static util.IterableUtils.zip;
 import static util.MathUtils.isExponentiationOf;
 import static java.util.Arrays.copyOf;
-
 import numeral.IntFrac;
 import numeral.Numeral;
 import util.Pair;
@@ -36,6 +35,29 @@ public class FastConversion extends BaseConversion {
 	}
 
 	@Override
+	public String toString() {
+		StringBuilder b = new StringBuilder();
+		b.append(toString(encoded(), baseRatio().first, encodedBase()));
+		b.append(" = ");
+		b.append(toString(decoded(), baseRatio().second, decodedBase()));
+		return b.toString();
+	}
+	private String toString(Numeral n, int partition, int base) {
+		StringBuilder b = new StringBuilder();
+		b.append("(");
+		for (int i = n.maxPos(); i >= n.minPos(); --i) {
+			b.append(n.get(i));
+			if (i != n.minPos()) {
+				if (i % partition == 0) b.append('|');
+				if (i == 0) b.append('.');
+			}
+		}
+		b.append(")_");
+		b.append(base);
+		return b.toString();
+	}
+
+	@Override
 	protected void testParamConstraints() {
 		if (!isExponentiationOf(encBase, decBase)
 				&& !isExponentiationOf(decBase, encBase)) throw new IllegalArgumentException(
@@ -56,7 +78,7 @@ public class FastConversion extends BaseConversion {
 
 	/*
 	 * converts integer part of input
-	 * (digits are written in increasing order)
+	 * digits are written in increasing order
 	 * examples:
 	 * (10111)_2 = (?)_16
 	 * integer:    [11101]
@@ -86,18 +108,18 @@ public class FastConversion extends BaseConversion {
 	}
 	/*
 	 * converts fraction part of input
-	 * as integer but reverse all partitions and ds (digits are written in descending order)
+	 * as integer but reverse all partitions
+	 * digit groups are written in some kind of inverted little endian mode
 	 */
 	private void convertFraction(int[] fraction) {
 		int[][] digitGroups = partition(fraction, baseRatio.first, true);
 		for (Pair<int[], Integer> p : zip(asIterable(digitGroups),
 				counter(-1, -baseRatio.second))) {
-			reverse(p.first);
+			reverse(p.first);//now ascending
 			int[] ds = base2base(encBase, decBase, p.first);
 			ds = copyOf(ds, baseRatio.second);
-			reverse(ds);
 			for (int i = 0; i < baseRatio.second; ++i)
-				decoded.set(p.second - i, ds[i]);
+				decoded.set(p.second - baseRatio.second + 1 + i, ds[i]);
 		}
 	}
 	private Pair<Integer, Integer>	baseRatio;
