@@ -1,4 +1,4 @@
-package util;
+package numeral_systems.util;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

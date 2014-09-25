@@ -1,13 +1,13 @@
-package printer;
+package numeral_systems.printer;
 
-import static util.Pair.make_pair;
+import static numeral_systems.util.Pair.make_pair;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import numeral.Numeral;
-import util.Pair;
-import conversion.FastConversion;
+import numeral_systems.numeral.Numeral;
+import numeral_systems.util.Pair;
+import numeral_systems.conversion.FastConversion;
 
 public abstract class FastConversionPrinter extends ExercisePrinter {
 	public FastConversionPrinter(FastConversion conv,

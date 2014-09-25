@@ -1,4 +1,4 @@
-package util;
+package numeral_systems.util;
 
 import java.util.Arrays;
 import java.util.Iterator;

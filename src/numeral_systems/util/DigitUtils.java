@@ -1,6 +1,6 @@
-package util;
+package numeral_systems.util;
 
-import static util.MathUtils.*;
+import static numeral_systems.util.MathUtils.*;
 import static java.lang.Math.log;
 
 import java.util.HashMap;

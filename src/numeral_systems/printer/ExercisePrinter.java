@@ -1,8 +1,8 @@
-package printer;
+package numeral_systems.printer;
 
 import java.util.List;
 
-import util.Pair;
+import numeral_systems.util.Pair;
 
 public abstract class ExercisePrinter {
 	public String exercise() {

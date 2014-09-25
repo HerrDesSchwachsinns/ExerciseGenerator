@@ -1,6 +1,6 @@
-package numeral;
+package numeral_systems.numeral;
 
-import util.Pair;
+import numeral_systems.util.Pair;
 
 public class IntFrac extends Pair<int[], int[]> {
 

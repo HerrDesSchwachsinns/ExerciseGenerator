@@ -1,7 +1,7 @@
-package conversion;
+package numeral_systems.conversion;
 
-import util.DigitUtils;
-import numeral.Numeral;
+import numeral_systems.util.DigitUtils;
+import numeral_systems.numeral.Numeral;
 
 /**
  * BaseConversion is the base class of all conversion algorithms. In order to

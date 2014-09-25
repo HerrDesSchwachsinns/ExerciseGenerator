@@ -1,18 +1,18 @@
-package conversion;
+package numeral_systems.conversion;
 
 import static java.lang.Math.max;
-import static util.ArrayUtils.partition;
-import static util.ArrayUtils.reverse;
-import static util.DigitUtils.base2base;
-import static util.DigitUtils.digits_for_base;
-import static util.IterableUtils.asIterable;
-import static util.IterableUtils.counter;
-import static util.IterableUtils.zip;
-import static util.MathUtils.isExponentiationOf;
+import static numeral_systems.util.ArrayUtils.partition;
+import static numeral_systems.util.ArrayUtils.reverse;
+import static numeral_systems.util.DigitUtils.base2base;
+import static numeral_systems.util.DigitUtils.digits_for_base;
+import static numeral_systems.util.IterableUtils.asIterable;
+import static numeral_systems.util.IterableUtils.counter;
+import static numeral_systems.util.IterableUtils.zip;
+import static numeral_systems.util.MathUtils.isExponentiationOf;
 import static java.util.Arrays.copyOf;
-import numeral.IntFrac;
-import numeral.Numeral;
-import util.Pair;
+import numeral_systems.numeral.IntFrac;
+import numeral_systems.numeral.Numeral;
+import numeral_systems.util.Pair;
 
 //TODO combine all implementation parts to one more generic
 /**

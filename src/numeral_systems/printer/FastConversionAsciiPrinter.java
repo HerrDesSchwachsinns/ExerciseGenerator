@@ -1,8 +1,8 @@
-package printer;
+package numeral_systems.printer;
 
-import util.DigitUtils;
-import numeral.Numeral;
-import conversion.FastConversion;
+import numeral_systems.util.DigitUtils;
+import numeral_systems.numeral.Numeral;
+import numeral_systems.conversion.FastConversion;
 
 public class FastConversionAsciiPrinter extends FastConversionPrinter {
 

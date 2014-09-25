@@ -1,4 +1,4 @@
-package util;
+package numeral_systems.util;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import static util.ArrayUtils.*;
+import static numeral_systems.util.ArrayUtils.*;
 
 public class ArrayUtilsTest {
 

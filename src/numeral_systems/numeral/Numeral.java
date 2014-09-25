@@ -1,9 +1,9 @@
-package numeral;
+package numeral_systems.numeral;
 
 import java.util.Arrays;
 
-import util.ArrayUtils;
-import util.DigitUtils;
+import numeral_systems.util.ArrayUtils;
+import numeral_systems.util.DigitUtils;
 
 public class Numeral implements Comparable<Numeral> {
 	/**

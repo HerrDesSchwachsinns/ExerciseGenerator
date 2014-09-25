@@ -1,4 +1,4 @@
-package util;
+package numeral_systems.util;
 
 public class Pair<S, T> {
 	public final S	first;

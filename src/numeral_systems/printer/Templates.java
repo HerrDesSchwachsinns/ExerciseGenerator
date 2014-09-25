@@ -1,4 +1,4 @@
-package printer;
+package numeral_systems.printer;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import util.Pair;
+import numeral_systems.util.Pair;
 
 public class Templates {
 	private Templates() {
