@@ -35,29 +35,6 @@ public class FastConversion extends BaseConversion {
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder b = new StringBuilder();
-		b.append(toString(encoded(), baseRatio().first, encodedBase()));
-		b.append(" = ");
-		b.append(toString(decoded(), baseRatio().second, decodedBase()));
-		return b.toString();
-	}
-	private String toString(Numeral n, int partition, int base) {
-		StringBuilder b = new StringBuilder();
-		b.append("(");
-		for (int i = n.maxPos(); i >= n.minPos(); --i) {
-			b.append(n.get(i));
-			if (i != n.minPos()) {
-				if (i % partition == 0) b.append('|');
-				if (i == 0) b.append('.');
-			}
-		}
-		b.append(")_");
-		b.append(base);
-		return b.toString();
-	}
-
-	@Override
 	protected void testParamConstraints() {
 		if (!isExponentiationOf(encBase, decBase)
 				&& !isExponentiationOf(decBase, encBase)) throw new IllegalArgumentException(

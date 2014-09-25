@@ -7,9 +7,9 @@ public class Pair<S, T> {
 		this.first = first;
 		this.second = second;
 	}
-	//	public static <S, T> Pair<S, T> make_pair(S first, T second) {
-	//		return new Pair<S, T>(first, second);
-	//	}
+	public static <S, T> Pair<S, T> make_pair(S first, T second) {
+		return new Pair<S, T>(first, second);
+	}
 	@Override
 	public boolean equals(Object that) {
 		if (that == null) return false;
