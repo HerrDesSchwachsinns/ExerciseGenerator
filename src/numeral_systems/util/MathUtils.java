@@ -39,9 +39,9 @@ public class MathUtils {
 	 * 
 	 * @param y
 	 * @param x
-	 * @return true if y is a exponentiation of x false otherwise
+	 * @return true if y is a power of x false otherwise
 	 */
-	public static boolean isExponentiationOf(int y, int x) {
+	public static boolean isPowerOf(int y, int x) {
 		int e = (int) (logb(x, y));
 		return pow(x, e) == y;
 	}

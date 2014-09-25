@@ -8,7 +8,7 @@ import static numeral_systems.util.DigitUtils.digits_for_base;
 import static numeral_systems.util.IterableUtils.asIterable;
 import static numeral_systems.util.IterableUtils.counter;
 import static numeral_systems.util.IterableUtils.zip;
-import static numeral_systems.util.MathUtils.isExponentiationOf;
+import static numeral_systems.util.MathUtils.isPowerOf;
 import static java.util.Arrays.copyOf;
 import numeral_systems.numeral.IntFrac;
 import numeral_systems.numeral.Numeral;
@@ -36,8 +36,8 @@ public class FastConversion extends BaseConversion {
 
 	@Override
 	protected void testParamConstraints() {
-		if (!isExponentiationOf(encBase, decBase)
-				&& !isExponentiationOf(decBase, encBase)) throw new IllegalArgumentException(
+		if (!isPowerOf(encBase, decBase)
+				&& !isPowerOf(decBase, encBase)) throw new IllegalArgumentException(
 				"bases " + encBase + " and " + decBase
 						+ " are not compatible for fast conversion");
 	}

@@ -30,20 +30,20 @@ public class MathUtilsTest {
 	}
 	@Test
 	public void testisExponentiationOf2() {
-		assertEquals(true, MathUtils.isExponentiationOf(2, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(3, 2));
-		assertEquals(true, MathUtils.isExponentiationOf(4, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(5, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(6, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(7, 2));
-		assertEquals(true, MathUtils.isExponentiationOf(8, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(9, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(10, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(11, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(12, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(13, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(14, 2));
-		assertEquals(false, MathUtils.isExponentiationOf(15, 2));
-		assertEquals(true, MathUtils.isExponentiationOf(16, 2));
+		assertEquals(true, MathUtils.isPowerOf(2, 2));
+		assertEquals(false, MathUtils.isPowerOf(3, 2));
+		assertEquals(true, MathUtils.isPowerOf(4, 2));
+		assertEquals(false, MathUtils.isPowerOf(5, 2));
+		assertEquals(false, MathUtils.isPowerOf(6, 2));
+		assertEquals(false, MathUtils.isPowerOf(7, 2));
+		assertEquals(true, MathUtils.isPowerOf(8, 2));
+		assertEquals(false, MathUtils.isPowerOf(9, 2));
+		assertEquals(false, MathUtils.isPowerOf(10, 2));
+		assertEquals(false, MathUtils.isPowerOf(11, 2));
+		assertEquals(false, MathUtils.isPowerOf(12, 2));
+		assertEquals(false, MathUtils.isPowerOf(13, 2));
+		assertEquals(false, MathUtils.isPowerOf(14, 2));
+		assertEquals(false, MathUtils.isPowerOf(15, 2));
+		assertEquals(true, MathUtils.isPowerOf(16, 2));
 	}
 }
