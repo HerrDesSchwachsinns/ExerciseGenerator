@@ -1,6 +1,8 @@
 package numeral_systems.numeral;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import numeral_systems.util.ArrayUtils;
 import numeral_systems.util.DigitUtils;
@@ -90,10 +92,17 @@ public class Numeral implements Comparable<Numeral> {
 	public int maxPos() {
 		return index2pos(maxIndex);
 	}
+
+	//================ AXIOMS ================//
+
 	public boolean isZero() {
 		return minPos() == 0 && maxPos() == 0 && get(0) == 0;
 	}
-
+	/**
+	 * add one to this in base
+	 * 
+	 * @param base
+	 */
 	public void addOne(int base) {
 		int pos = 0;
 		while (get(pos) + 1 >= base) {
@@ -102,8 +111,97 @@ public class Numeral implements Comparable<Numeral> {
 		}
 		set(pos, get(pos) + 1);
 	}
+
+	//================ DIGIT ================//
+
 	/**
-	 * assumes that 'that' is not greater than this and base is valid
+	 * add digit d in base. Assumes 0 <= d < base (d is valid) and base is valid
+	 * 
+	 * @param d
+	 * @param base
+	 */
+	public void add(int d, int base) {
+		int pos = 0;
+		int carry = add(pos, d, 0, base);
+		while (carry != 0) {
+			pos++;
+			carry = add(pos, 0, carry, base);
+		}
+	}
+	private int add(int pos, int d, int carry, int base) {
+		int y = get(pos) + d + carry;
+		carry = y >= base ? 1 : 0;
+		y = y >= 0 ? y - base : y;
+		set(pos, y);
+		return carry;
+	}
+	/**
+	 * sub digit d in base. Assumes 0 <= d < base (d is valid) and d <= this and
+	 * base is valid
+	 * 
+	 * @param d
+	 * @param base
+	 */
+	public void sub(int d, int base) {
+		int pos = 0;
+		int carry = sub(pos, d, 0, base);
+		while (carry != 0) {
+			pos++;
+			carry = sub(pos, d, carry, base);
+		}
+	}
+	private int sub(int pos, int d, int carry, int base) {
+		int y = get(pos) - d - carry;
+		carry = y < 0 ? 1 : 0;
+		if (y < 0) y += base;
+		set(pos, y);
+		return carry;
+	}
+	/**
+	 * mult this with d. Assumes 0 <= d < base (d is valid) and base is valid
+	 * 
+	 * @param d
+	 * @param base
+	 */
+	public void mult(int d, int base) {
+		int minPos = minPos();
+		int maxPos = maxPos();
+		int carry = 0;
+		int pos;
+		for (pos = minPos; pos <= maxPos; ++pos) {
+			int y = get(pos) * d + carry;
+			carry = y / base;
+			y = y % base;
+			set(pos, y);
+		}
+		set(pos + 1, carry);
+	}
+
+	//================ NUMERAL ================//
+
+	/**
+	 * add that to this in base
+	 * 
+	 * @param that
+	 * @param base
+	 */
+	public void add(Numeral that, int base) {
+		int minPos = Math.min(this.minPos(), that.minPos());
+		int maxPos = Math.max(this.maxPos(), that.maxPos());
+		Numeral carry = new Numeral();
+
+		for (int pos = minPos; pos <= maxPos + 1; ++pos) {
+			int s = this.get(pos) + that.get(pos) + carry.get(pos);
+			if (s >= base) { //overflow -> carry
+				s -= base;
+				carry.set(pos + 1, 1);
+			}
+			this.set(pos, s);
+		}
+	}
+	/**
+	 * sub that to this in base. Assumes that 'that' is not greater than this
+	 * and base is valid
 	 * 
 	 * @param that
 	 * @param base
@@ -125,6 +223,16 @@ public class Numeral implements Comparable<Numeral> {
 		}
 	}
 	/**
+	 * mult this with that in base
+	 * 
+	 * @param that
+	 * @param base
+	 */
+	public void mult(Numeral that, int base) {
+		List<Numeral> partMult = new ArrayList<>();
+		//TODO implement
+	}
+	/**
 	 * 
 	 * @param base
 	 * @return string representation of this numeral, appending base
@@ -142,8 +250,9 @@ public class Numeral implements Comparable<Numeral> {
 		return clone;
 	}
 	public IntFrac toIntArray() {
-		return new IntFrac(ArrayUtils.copyOfRange(digits, zeroIndex, maxIndex+1),
-				ArrayUtils.copyOfRange(digits, zeroIndex, minIndex));
+		return new IntFrac(ArrayUtils.copyOfRange(digits, zeroIndex,
+				maxIndex + 1), ArrayUtils.copyOfRange(digits, zeroIndex,
+				minIndex));
 	}
 	@Override
 	public String toString() {
