@@ -2,9 +2,8 @@ package numeral_systems.arithmetic;
 
 import numeral_systems.numeral.Numeral;
 
-
-/*package*/class AustrianAddition extends NumeralAddition {
-	/*package*/AustrianAddition(Numeral augend, Numeral addend, int base) {
+public class AustrianAddition extends NumeralAddition {
+	public AustrianAddition(Numeral augend, Numeral addend, int base) {
 		super(augend, addend, base);
 	}
 

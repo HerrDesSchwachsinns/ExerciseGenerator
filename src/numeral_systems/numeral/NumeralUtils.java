@@ -16,4 +16,12 @@ public class NumeralUtils {
 		}
 		return true;
 	}
+	public static String toAlignedString(Numeral n, int alignment, char c) {
+		StringBuilder b = new StringBuilder();
+		int leftAlign = Math.max(0, alignment - n.maxPos());
+		for (int i = 0; i < leftAlign; ++i)
+			b.append(c);
+		b.append(n.toString());
+		return b.toString();
+	}
 }
