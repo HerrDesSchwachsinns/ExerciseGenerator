@@ -114,14 +114,16 @@ public class Numeral implements Comparable<Numeral> {
 	 * add one to this in base
 	 * 
 	 * @param base
+	 * @return this
 	 */
-	public void addOne(int base) {
+	public Numeral addOne(int base) {
 		int pos = 0;
 		while (get(pos) + 1 >= base) {
 			set(pos, 0);
 			++pos;
 		}
 		set(pos, get(pos) + 1);
+		return this;
 	}
 
 	//================ DIGIT ================//
@@ -131,14 +133,16 @@ public class Numeral implements Comparable<Numeral> {
 	 * 
 	 * @param d
 	 * @param base
+	 * @return this
 	 */
-	public void add(int d, int base) {
+	public Numeral add(int d, int base) {
 		int pos = 0;
 		int carry = add(pos, d, 0, base);
 		while (carry != 0) {
 			pos++;
 			carry = add(pos, 0, carry, base);
 		}
+		return this;
 	}
 	private int add(int pos, int d, int carry, int base) {
 		int y = get(pos) + d + carry;
@@ -153,14 +157,16 @@ public class Numeral implements Comparable<Numeral> {
 	 * 
 	 * @param d
 	 * @param base
+	 * @return this
 	 */
-	public void sub(int d, int base) {
+	public Numeral sub(int d, int base) {
 		int pos = 0;
 		int carry = sub(pos, d, 0, base);
 		while (carry != 0) {
 			pos++;
 			carry = sub(pos, d, carry, base);
 		}
+		return this;
 	}
 	private int sub(int pos, int d, int carry, int base) {
 		int y = get(pos) - d - carry;
@@ -174,8 +180,9 @@ public class Numeral implements Comparable<Numeral> {
 	 * 
 	 * @param d
 	 * @param base
+	 * @return this
 	 */
-	public void mult(int d, int base) {
+	public Numeral mult(int d, int base) {
 		int minPos = minPos();
 		int maxPos = maxPos();
 		int carry = 0;
@@ -187,6 +194,7 @@ public class Numeral implements Comparable<Numeral> {
 			set(pos, y);
 		}
 		set(pos + 1, carry);
+		return this;
 	}
 
 	//================ NUMERAL ================//
@@ -196,8 +204,9 @@ public class Numeral implements Comparable<Numeral> {
 	 * 
 	 * @param that
 	 * @param base
+	 * @return this
 	 */
-	public void add(Numeral that, int base) {
+	public Numeral add(Numeral that, int base) {
 		int minPos = Math.min(this.minPos(), that.minPos());
 		int maxPos = Math.max(this.maxPos(), that.maxPos());
 		Numeral carry = new Numeral();
@@ -210,6 +219,7 @@ public class Numeral implements Comparable<Numeral> {
 			}
 			this.set(pos, s);
 		}
+		return this;
 	}
 	/**
 	 * sub that to this in base. Assumes that 'that' is not greater than this
@@ -217,8 +227,9 @@ public class Numeral implements Comparable<Numeral> {
 	 * 
 	 * @param that
 	 * @param base
+	 * @return this
 	 */
-	public void sub(Numeral that, int base) {
+	public Numeral sub(Numeral that, int base) {
 		int maxPos = Math.max(this.maxPos(), that.maxPos());
 		int minPos = Math.min(this.minPos(), that.minPos());
 
@@ -233,14 +244,16 @@ public class Numeral implements Comparable<Numeral> {
 			}
 			this.set(pos, x);
 		}
+		return this;
 	}
 	/**
 	 * mult this with that in base
 	 * 
 	 * @param that
 	 * @param base
+	 * @return this
 	 */
-	public void mult(Numeral that, int base) {
+	public Numeral mult(Numeral that, int base) {
 		List<Numeral> partMult = new ArrayList<>();
 		//TODO implement
 		throw new NotImplementedException();
@@ -251,6 +264,7 @@ public class Numeral implements Comparable<Numeral> {
 	 * 'left' or smaller positions.
 	 * 
 	 * @param amount
+	 * @return this
 	 */
 	public Numeral shift(int amount) {
 		reserve(amount > 0 ? minPos() - amount : maxPos() - amount);//TODO reserve more efficiently
