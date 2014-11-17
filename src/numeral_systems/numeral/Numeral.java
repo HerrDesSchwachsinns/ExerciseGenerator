@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import numeral_systems.util.ArrayUtils;
 import numeral_systems.util.DigitUtils;
 
@@ -16,6 +17,17 @@ public class Numeral implements Comparable<Numeral> {
 		zeroIndex = 0;
 		minIndex = 0;
 		maxIndex = 0;
+	}
+	/**
+	 * deep copy constructor
+	 * 
+	 * @param that
+	 */
+	public Numeral(Numeral that) {
+		this.digits = Arrays.copyOf(that.digits, that.digits.length);
+		this.zeroIndex = that.zeroIndex;
+		this.minIndex = that.zeroIndex;
+		this.maxIndex = that.maxIndex;
 	}
 	/**
 	 * string conversion ctor. Creates a new Numeral with value specified in str
@@ -231,6 +243,21 @@ public class Numeral implements Comparable<Numeral> {
 	public void mult(Numeral that, int base) {
 		List<Numeral> partMult = new ArrayList<>();
 		//TODO implement
+		throw new NotImplementedException();
+	}
+	/**
+	 * shift this amount digits to left/right. A positive amount means shifting
+	 * to the 'right' or greater positions, a negative amount shifting to the
+	 * 'left' or smaller positions.
+	 * 
+	 * @param amount
+	 */
+	public Numeral shift(int amount) {
+		reserve(amount > 0 ? minPos() - amount : maxPos() - amount);//TODO reserve more efficiently
+		zeroIndex -= amount;
+		minIndex = Math.min(minIndex, zeroIndex);
+		maxIndex = Math.max(maxIndex, zeroIndex);
+		return this;
 	}
 	/**
 	 * 
@@ -276,7 +303,7 @@ public class Numeral implements Comparable<Numeral> {
 			return true;
 		} else if (obj instanceof String) {
 			try {
-				return equals(new Numeral((String) obj));
+				return equals(new Numeral((String) obj)); //Not efficient
 			} catch (Exception ex) {
 				return false;
 			}
@@ -299,7 +326,7 @@ public class Numeral implements Comparable<Numeral> {
 
 	/*
 	 * value: 1 2 . 3 4 5
-	 *                 min       z max
+	 *                min       z max
 	 *           |     |        |  |  |
 	 * digits: [ 0  0  5  4  3  2  1  0 ]
 	 *  index:   0  1  2  3  4  5  6  7
