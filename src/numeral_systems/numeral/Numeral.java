@@ -26,7 +26,7 @@ public class Numeral implements Comparable<Numeral> {
 	public Numeral(Numeral that) {
 		this.digits = Arrays.copyOf(that.digits, that.digits.length);
 		this.zeroIndex = that.zeroIndex;
-		this.minIndex = that.zeroIndex;
+		this.minIndex = that.minIndex;
 		this.maxIndex = that.maxIndex;
 	}
 	/**
