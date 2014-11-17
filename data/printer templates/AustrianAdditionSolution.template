@@ -1,0 +1,8 @@
+Berechnen Sie die Summe von ([%AUGEND%])_{[%BASE%]} und ([%ADDEND%])_{[%BASE%]} im angegebenen Zahelnsystem.
+
+Lösung:
+
+ [%ALIGNED_AUGEND%]
++[%ALIGNED_ADDEND%]
+=[%ALIGNED_SUM%]
+c[%ALIGNED_CARRY%]

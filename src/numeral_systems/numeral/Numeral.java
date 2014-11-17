@@ -193,7 +193,7 @@ public class Numeral implements Comparable<Numeral> {
 			y = y % base;
 			set(pos, y);
 		}
-		set(pos + 1, carry);
+		set(pos, carry);
 		return this;
 	}
 
