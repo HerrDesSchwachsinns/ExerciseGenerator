@@ -267,6 +267,7 @@ public class Numeral implements Comparable<Numeral> {
 	 * @return this
 	 */
 	public Numeral shift(int amount) {
+		if (amount == 0 || isZero()) return this;
 		reserve(amount > 0 ? minPos() - amount : maxPos() - amount);//TODO reserve more efficiently
 		zeroIndex -= amount;
 		minIndex = Math.min(minIndex, zeroIndex);

@@ -23,8 +23,8 @@ public class PrinterTest {
 	//	}
 	@Test
 	public void multiplication() {
-		LongMultiplication mult = new LongMultiplication(new Numeral("101.1"),
-				new Numeral("10.11"), 2);
+		LongMultiplication mult = new LongMultiplication(new Numeral("123.45"),
+				new Numeral("3.2"), 10);
 		LongMultiplicationPrinter printer = new LongMultiplicationPrinter(mult);
 		//		System.out.println(printer.exercise());
 		System.out.println(printer.solution());

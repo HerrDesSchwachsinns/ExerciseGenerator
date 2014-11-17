@@ -3,4 +3,7 @@ Berechnen sie das Produkt von ([%MULTIPLICAND%])_{[%BASE%]} und ([%MULTIPLIER%])
 Lösung:
 
 ([%MULTIPLICAND%])_{[%BASE%]} * ([%MULTIPLIER%])_{[%BASE%]} = ([%PRODUCT%])_{[%BASE%]}
-[%PARTIAL_RESULTS%]
+----------------
+[%PARTIAL_RESULTS_ALIGNED%]
+----------------
+[%PRODUCT%]
