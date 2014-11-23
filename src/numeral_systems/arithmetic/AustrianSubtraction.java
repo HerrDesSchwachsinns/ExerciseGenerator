@@ -2,11 +2,9 @@ package numeral_systems.arithmetic;
 
 import numeral_systems.numeral.Numeral;
 
+public class AustrianSubtraction extends NumeralSubtraction {
 
-/*package*/class AustrianSubtraction extends NumeralSubtraction {
-
-	/*package*/AustrianSubtraction(Numeral minuend, Numeral subtrahend,
-			int base) {
+	public AustrianSubtraction(Numeral minuend, Numeral subtrahend, int base) {
 		super(minuend, subtrahend, base);
 	}
 

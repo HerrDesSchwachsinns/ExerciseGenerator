@@ -1,19 +1,21 @@
 package numeral_systems;
 
 import numeral_systems.arithmetic.AustrianAddition;
+import numeral_systems.arithmetic.AustrianSubtraction;
 import numeral_systems.arithmetic.LongDivision;
 import numeral_systems.arithmetic.LongMultiplication;
 import numeral_systems.conversion.FastConversion;
 import numeral_systems.numeral.Numeral;
 import numeral_systems.printer.ExercisePrinter;
 import numeral_systems.printer.arithmetic.AustrianAdditionPrinter;
+import numeral_systems.printer.arithmetic.AustrianSubtractionPrinter;
 import numeral_systems.printer.arithmetic.LongDivisionPrinter;
 import numeral_systems.printer.arithmetic.LongMultiplicationPrinter;
 import numeral_systems.printer.conversion.FastConversionAsciiPrinter;
 
 public class CliMain {
 	public static void main(String[] args) {
-		args = new String[] { "/4", "121", "13" };
+		args = new String[] { "-4", "121", "13" };
 		if (args.length < 3) {
 			System.err.println("not enough parameter");
 			printHelp();
@@ -56,6 +58,8 @@ public class CliMain {
 					base));
 			break;
 		case '-':
+			printer = new AustrianSubtractionPrinter(new AustrianSubtraction(
+					n1, n2, base));
 			break;
 		case '*':
 			printer = new LongMultiplicationPrinter(new LongMultiplication(n1,
@@ -84,6 +88,7 @@ public class CliMain {
 					decodedBase, encodededBase, n));
 			break;
 		case 'c':
+			System.out.println("NOT IMPLEMENTED YET");
 			break;
 		default:
 			assert (false);

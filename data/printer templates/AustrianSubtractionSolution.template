@@ -1,0 +1,7 @@
+Berechnen Sie die Differenz von ([%MINUEND%])_{[%BASE%]} und ([%SUBTRAHEND%])_{[%BASE%]} im angegebenen Zahlensystem.
+Lösung:
+
+ [%ALIGNED_MINUEND%]
++[%ALIGNED_SUBTRAHEND%]
+=[%ALIGNED_DIFFERENCE%]
+c[%ALIGNED_CARRY%]
