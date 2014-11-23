@@ -23,7 +23,7 @@ public abstract class NumeralMultiplication {
 		this.base = base;
 		this.partialResults = new ArrayList<Numeral>();
 		testParameter();
-		doAddition();
+		doMultiplication();
 	}
 	public Numeral multiplicand() {
 		return multiplicand;
@@ -51,7 +51,7 @@ public abstract class NumeralMultiplication {
 	 * it is guaranteed that multiplicand and multiplier are the same (valid)
 	 * base, product is initialized to zero and partialResults is empty
 	 */
-	protected abstract void doAddition();
+	protected abstract void doMultiplication();
 
 	private void testParameter() {
 		if (!DigitUtils.isValidBase(base)) throw new IllegalArgumentException(

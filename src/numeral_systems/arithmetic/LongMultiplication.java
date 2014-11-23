@@ -7,7 +7,7 @@ public class LongMultiplication extends NumeralMultiplication {
 		super(multiplicant, multiplier, base);
 	}
 	@Override
-	protected void doAddition() {
+	protected void doMultiplication() {
 		for (int i = multiplier.minPos(); i <= multiplier.maxPos(); ++i) {
 			Numeral n = new Numeral(multiplicand);
 			n.mult(multiplier.get(i), base).shift(i);
