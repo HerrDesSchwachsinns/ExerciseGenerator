@@ -1,0 +1,5 @@
+Berechnen Sie den Quotienten von ([%DIVIDEND%])_{[%BASE%]} und ([%DIVISOR%])_{[%BASE%]} im angegebenen Zahlensystem.
+
+Lösung:
+
+([%DIVIDEND%])_{[%BASE%]} / ([%DIVISOR%])_{[%BASE%]} = ([%QUOTIENT%])_{[%BASE%]}

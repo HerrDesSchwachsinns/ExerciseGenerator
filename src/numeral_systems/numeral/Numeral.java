@@ -38,6 +38,8 @@ public class Numeral implements Comparable<Numeral> {
 	 *             if str couldn't be parsed
 	 */
 	public Numeral(String str) {
+		if (str.length() == 0) throw new IllegalArgumentException(
+				"string is empty");
 		//not the most efficient one but who cares...
 		//delete trailing/ending zeros
 		int begin = 0, end = str.length() - 1;

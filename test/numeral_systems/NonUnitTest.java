@@ -1,15 +1,16 @@
 package numeral_systems;
 
+import numeral_systems.arithmetic.LongDivision;
 import numeral_systems.numeral.Numeral;
+import numeral_systems.printer.arithmetic.LongDivisionPrinter;
 
 public class NonUnitTest {
 	public static void main(String[] args) {
-		System.out.println(new Numeral("12.345").shift(-3));
-		System.out.println(new Numeral("12.345").shift(-2));
-		System.out.println(new Numeral("12.345").shift(-1));
-		System.out.println(new Numeral("12.345").shift(0));
-		System.out.println(new Numeral("12.345").shift(1));
-		System.out.println(new Numeral("12.345").shift(2));
-		System.out.println(new Numeral("12.345").shift(3));
+		Numeral n1 = new Numeral("27");
+		Numeral n2 = new Numeral("2");
+		int base = 10;
+		LongDivision div = new LongDivision(n1, n2, base);
+		LongDivisionPrinter printer = new LongDivisionPrinter(div);
+		System.out.println(printer.solution());
 	}
 }

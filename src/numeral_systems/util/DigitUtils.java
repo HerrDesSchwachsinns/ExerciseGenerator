@@ -95,7 +95,8 @@ public class DigitUtils {
 	 */
 	public static int c2d(char c) {
 		Integer x = char2intMap.get(Character.toLowerCase(c));
-		if (x == null) throw new IllegalArgumentException(c + " has no mapping");
+		if (x == null) throw new IllegalArgumentException("'" + c
+				+ "' has no mapping");
 		return x;
 	}
 	/**
