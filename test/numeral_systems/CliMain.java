@@ -18,8 +18,8 @@ import numeral_systems.printer.conversion.HornerConversionPrinter;
 public class CliMain {
 	public static void main(String[] args) {
 		//		args = new String[] { "h" };
-		//		args = new String[] {""};
-		args = new String[] { "c", "2", "10", "0.3" };
+		args = new String[] { "/10", "10", "3" };
+		//args = new String[] { "c", "2", "10", "0.3" };
 		if (args.length < 1) {
 			System.err.println("not enough parameter");
 			printHelp();

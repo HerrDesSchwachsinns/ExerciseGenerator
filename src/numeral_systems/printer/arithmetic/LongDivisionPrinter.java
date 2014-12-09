@@ -2,7 +2,9 @@ package numeral_systems.printer.arithmetic;
 
 import numeral_systems.arithmetic.LongDivision;
 import numeral_systems.numeral.Numeral;
+import numeral_systems.numeral.NumeralUtils;
 import numeral_systems.printer.GenericPrinter;
+import numeral_systems.printer.PrinterUtils;
 
 public class LongDivisionPrinter extends GenericPrinter {
 
@@ -14,7 +16,9 @@ public class LongDivisionPrinter extends GenericPrinter {
 		add(QUOTIENT, division.quotient().toString());
 		add(BASE, String.valueOf(division.base()));
 		add(PARTIAL_RESULTS, division.partialResults().toString());
-		add(QUOTIENT_RECURRING, recurringQuotient(division));
+		add(QUOTIENT_RECURRING,
+				PrinterUtils.recurringNumeral(division.quotient(),
+						division.recurringIndex()));
 	}
 	protected final static String	DIVIDEND					= "[%DIVIDEND%]";
 	protected final static String	DIVISOR						= "[%DIVISOR%]";
@@ -48,18 +52,4 @@ public class LongDivisionPrinter extends GenericPrinter {
 																		+ QUOTIENT
 																		+ ")_"
 																		+ BASE;
-	private String recurringQuotient(LongDivision division) {
-		if (!division.isRecurring()) return division.quotient().toString();
-		StringBuilder b = new StringBuilder();
-		Numeral quot = division.quotient();
-		b.append(quot.integer());
-		int pos;
-		for (pos = -1; pos >= division.recurringIndex(); --pos) {
-			b.append(quot.get(pos));
-		}
-		for (/*pos=division.recurringIndex()*/; pos >= quot.minPos(); --pos) {
-			b.append(quot.get(pos));
-		}
-		return b.toString();
-	}
 }

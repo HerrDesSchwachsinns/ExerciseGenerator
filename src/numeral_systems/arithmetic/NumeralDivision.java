@@ -16,6 +16,7 @@ public abstract class NumeralDivision {
 		this.divisor = divisor;
 		this.quotient = new Numeral();
 		this.base = base;
+		init();
 		testParameter();
 		doDivision();
 	}
@@ -38,11 +39,14 @@ public abstract class NumeralDivision {
 	protected int		base;
 
 	/**
+	 * this method will be invoked before doDivision is called
+	 */
+	protected void init() {}
+	/**
 	 * it is guaranteed that dividend and divisor are the same (valid) base and
 	 * quotient is initialized to zero
 	 */
 	protected abstract void doDivision();
-	protected void init() {}
 
 	private void testParameter() {
 		if (!DigitUtils.isValidBase(base)) throw new IllegalArgumentException(

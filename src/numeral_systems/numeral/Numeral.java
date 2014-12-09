@@ -6,7 +6,6 @@ import java.util.List;
 
 import numeral_systems.util.ArrayUtils;
 import numeral_systems.util.DigitUtils;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Numeral implements Comparable<Numeral> {
 	/**
@@ -258,7 +257,7 @@ public class Numeral implements Comparable<Numeral> {
 	public Numeral mult(Numeral that, int base) {
 		List<Numeral> partMult = new ArrayList<>();
 		//TODO implement
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 	/**
 	 * shift this amount digits to left/right. A positive amount means shifting
@@ -289,9 +288,9 @@ public class Numeral implements Comparable<Numeral> {
 	 * @return clone of integer part
 	 */
 	public Numeral integer() {
-		Numeral that = new Numeral(this); //TODO implement more efficient
-		for (int pos = -1; pos >= this.minPos(); --pos) {
-			set(pos, 0);
+		Numeral that = new Numeral(); //TODO implement more efficient
+		for (int pos = this.maxPos(); pos >= 0; --pos) {
+			set(pos, this.get(pos));
 		}
 		return that;
 	}
