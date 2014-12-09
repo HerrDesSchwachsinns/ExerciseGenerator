@@ -1,10 +1,12 @@
 package numeral_systems.printer.arithmetic;
 
+import java.util.List;
+
 import numeral_systems.arithmetic.LongDivision;
 import numeral_systems.numeral.Numeral;
-import numeral_systems.numeral.NumeralUtils;
 import numeral_systems.printer.GenericPrinter;
 import numeral_systems.printer.PrinterUtils;
+import numeral_systems.util.Pair;
 
 public class LongDivisionPrinter extends GenericPrinter {
 
@@ -15,7 +17,9 @@ public class LongDivisionPrinter extends GenericPrinter {
 		add(DIVISOR, division.divisor().toString());
 		add(QUOTIENT, division.quotient().toString());
 		add(BASE, String.valueOf(division.base()));
-		add(PARTIAL_RESULTS, division.partialResults().toString());
+		add(PARTIAL_RESULTS,
+				partialResults(division.partialResults(), division.divisor(),
+						division.base()));
 		add(QUOTIENT_RECURRING,
 				PrinterUtils.recurringNumeral(division.quotient(),
 						division.recurringIndex()));
@@ -52,4 +56,21 @@ public class LongDivisionPrinter extends GenericPrinter {
 																		+ QUOTIENT
 																		+ ")_"
 																		+ BASE;
+	private String partialResults(List<Pair<Numeral, Integer>> partialResults,
+			Numeral divisor, int base) {
+		StringBuilder b = new StringBuilder();
+		for (int i = 0; i < partialResults.size(); ++i) {
+			Pair<Numeral, Integer> pair = partialResults.get(i);
+			appendPartialResult(b, pair, divisor, base);
+			b.append("\n--------\n");
+		}
+		return b.toString();
+	}
+	private void appendPartialResult(StringBuilder b,
+			Pair<Numeral, Integer> pair, Numeral divisor, int base) {
+		b.append(pair.first);
+		b.append("\n");
+		b.append("- ");
+		b.append(new Numeral(divisor).mult(pair.second, base));
+	}
 }

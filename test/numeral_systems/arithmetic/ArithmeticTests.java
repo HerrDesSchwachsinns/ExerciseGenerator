@@ -5,5 +5,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AdditionTest.class, SubtractionTest.class })
+@SuiteClasses({ AdditionTest.class, SubtractionTest.class,
+		MultiplicationTest.class, DivisionTest.class })
 public class ArithmeticTests {}

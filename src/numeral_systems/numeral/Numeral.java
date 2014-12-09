@@ -290,7 +290,7 @@ public class Numeral implements Comparable<Numeral> {
 	public Numeral integer() {
 		Numeral that = new Numeral(); //TODO implement more efficient
 		for (int pos = this.maxPos(); pos >= 0; --pos) {
-			set(pos, this.get(pos));
+			that.set(pos, this.get(pos));
 		}
 		return that;
 	}

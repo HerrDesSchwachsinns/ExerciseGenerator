@@ -46,7 +46,8 @@ public class LongDivision extends NumeralDivision {
 		for (int pos = dividend.maxPos(); pos >= dividend.minPos()
 				|| !sub.isZero(); --pos) {
 			sub.set(0, dividend.get(pos));
-			if (pos < dividend.minPos() && is_Recurring(sub)) break;
+			//test for recurring after first trailing zero
+			if (pos < dividend.minPos() - 1 && is_Recurring(sub)) break;
 			Numeral tmp_sub = new Numeral(sub);
 			int sub_count = sub_divisor(sub);
 			partialResults.add(make_pair(tmp_sub, sub_count));
@@ -65,10 +66,10 @@ public class LongDivision extends NumeralDivision {
 		return count;
 	}
 	private boolean is_Recurring(Numeral sub) {
-		int start = dividend.maxPos() + dividend.minPos() + 1; //start at zero-1 pos
+		int start = dividend.maxPos() + 1; //start at zero-1 pos
 		for (int i = start; i < partialResults.size(); ++i) {
 			if (partialResults.get(i).first.equals(sub)) {
-				recurring_index = i - start - 1;
+				recurring_index = start - i - 1;
 				return true;
 			}
 		}
