@@ -15,9 +15,9 @@ public class LongDivision extends NumeralDivision {
 		Numeral n2 = new Numeral("110");
 
 		LongDivision div = new LongDivision(n1, n2, 2);
-				System.out.println(div.dividend() + " / " + div.divisor() + " = "
-						+ div.quotient());
-				div.partialResults().forEach(System.out::println);
+		System.out.println(div.dividend() + " / " + div.divisor() + " = "
+				+ div.quotient());
+		div.partialResults().forEach(System.out::println);
 	}
 
 	public LongDivision(Numeral dividend, Numeral divisor, int base) {
@@ -26,6 +26,12 @@ public class LongDivision extends NumeralDivision {
 
 	public List<Pair<Numeral, Integer>> partialResults() {
 		return partialResults;
+	}
+	public boolean isRecurring() {
+		return recurring_index != 0;
+	}
+	public int recurringIndex() {
+		return recurring_index;
 	}
 
 	@Override
@@ -39,11 +45,12 @@ public class LongDivision extends NumeralDivision {
 			Numeral tmp_sub = new Numeral(sub);
 			int sub_count = sub_divisor(sub);
 			partialResults.add(make_pair(tmp_sub, sub_count));
-//			System.out.println(partialResults.get(partialResults.size() - 1));
+			//			System.out.println(partialResults.get(partialResults.size() - 1));
 			quotient.set(pos, sub_count);
 			sub.shift(1);
 		}
 	}
+
 	private int sub_divisor(Numeral sub) {
 		int count = 0;
 		while (sub.compareTo(divisor) >= 0) {
@@ -53,12 +60,16 @@ public class LongDivision extends NumeralDivision {
 		return count;
 	}
 	private boolean is_Recurring(Numeral sub) {
-		int start = dividend.maxPos() + dividend.minPos();
+		int start = dividend.maxPos() + dividend.minPos(); //start at zero pos
 		for (int i = start; i < partialResults.size(); ++i) {
-			if (partialResults.get(i).first.equals(sub)) return true;
+			if (partialResults.get(i).first.equals(sub)) {
+				recurring_index = i;
+				return true;
+			}
 		}
 		return false;
 	}
 
 	private List<Pair<Numeral, Integer>>	partialResults;
+	private int								recurring_index	= 0;
 }

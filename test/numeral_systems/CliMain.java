@@ -5,6 +5,7 @@ import numeral_systems.arithmetic.AustrianSubtraction;
 import numeral_systems.arithmetic.LongDivision;
 import numeral_systems.arithmetic.LongMultiplication;
 import numeral_systems.conversion.FastConversion;
+import numeral_systems.conversion.HornerConversion;
 import numeral_systems.numeral.Numeral;
 import numeral_systems.printer.ExercisePrinter;
 import numeral_systems.printer.arithmetic.AustrianAdditionPrinter;
@@ -12,11 +13,14 @@ import numeral_systems.printer.arithmetic.AustrianSubtractionPrinter;
 import numeral_systems.printer.arithmetic.LongDivisionPrinter;
 import numeral_systems.printer.arithmetic.LongMultiplicationPrinter;
 import numeral_systems.printer.conversion.FastConversionAsciiPrinter;
+import numeral_systems.printer.conversion.HornerConversionPrinter;
 
 public class CliMain {
 	public static void main(String[] args) {
-		args = new String[] { "-4", "121", "13" };
-		if (args.length < 3) {
+		//		args = new String[] { "h" };
+		//		args = new String[] {""};
+		args = new String[] { "c", "2", "10", "0.3" };
+		if (args.length < 1) {
 			System.err.println("not enough parameter");
 			printHelp();
 			System.exit(1);
@@ -48,6 +52,10 @@ public class CliMain {
 		}
 	}
 	private static void arithmetic(String[] args) {
+		if (args.length != 3) {
+			System.err.println("not enough parameter");
+			System.exit(1);
+		}
 		int base = Integer.parseInt(args[0].substring(1));
 		Numeral n1 = new Numeral(args[1]);
 		Numeral n2 = new Numeral(args[2]);
@@ -88,7 +96,8 @@ public class CliMain {
 					decodedBase, encodededBase, n));
 			break;
 		case 'c':
-			System.out.println("NOT IMPLEMENTED YET");
+			printer = new HornerConversionPrinter(new HornerConversion(
+					decodedBase, encodededBase, n));
 			break;
 		default:
 			assert (false);

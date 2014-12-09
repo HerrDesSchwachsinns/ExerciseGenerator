@@ -2,6 +2,7 @@ package numeral_systems.conversion;
 
 import numeral_systems.util.DigitUtils;
 import numeral_systems.numeral.Numeral;
+import numeral_systems.numeral.NumeralUtils;
 
 /**
  * BaseConversion is the base class of all conversion algorithms. In order to
@@ -92,7 +93,7 @@ public abstract class BaseConversion {
 		if (!DigitUtils.isValidBase(decBase)) throw new IllegalArgumentException(
 				"encoded base is not valid(" + encBase + ")");
 		//
-		if (false/*TODO here: test if encoded is in specified base*/) throw new IllegalArgumentException(
+		if (!NumeralUtils.isValid(encoded, encBase)) throw new IllegalArgumentException(
 				"encoded " + encoded + " is not in specified base(" + encBase
 						+ ")");
 		testParamConstraints();

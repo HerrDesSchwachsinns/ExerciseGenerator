@@ -2,4 +2,5 @@ Berechnen Sie den Quotienten von ([%DIVIDEND%])_{[%BASE%]} und ([%DIVISOR%])_{[%
 
 Lösung:
 
-([%DIVIDEND%])_{[%BASE%]} / ([%DIVISOR%])_{[%BASE%]} = ([%QUOTIENT%])_{[%BASE%]}
+([%DIVIDEND%])_{[%BASE%]} / ([%DIVISOR%])_{[%BASE%]} = ([%QUOTIENT_RECURRING%])_{[%BASE%]}
+[%PARTIAL_RESULTS%]

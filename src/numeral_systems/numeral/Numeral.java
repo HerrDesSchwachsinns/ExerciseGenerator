@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import numeral_systems.util.ArrayUtils;
 import numeral_systems.util.DigitUtils;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Numeral implements Comparable<Numeral> {
 	/**
@@ -283,6 +283,17 @@ public class Numeral implements Comparable<Numeral> {
 	 */
 	public String toString(int base) {
 		return "(" + this.toString() + ")_" + base;
+	}
+	/**
+	 * 
+	 * @return clone of integer part
+	 */
+	public Numeral integer() {
+		Numeral that = new Numeral(this); //TODO implement more efficient
+		for (int pos = -1; pos >= this.minPos(); --pos) {
+			set(pos, 0);
+		}
+		return that;
 	}
 	@Override
 	public Numeral clone() {
