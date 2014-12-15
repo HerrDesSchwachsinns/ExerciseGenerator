@@ -37,6 +37,7 @@ public abstract class BaseConversion {
 		this.encBase = encBase;
 		this.encoded = encoded;
 		this.decoded = new Numeral();
+		init();
 		testParamDefaultConstraints();
 		doAlgorithm();
 	}
@@ -78,9 +79,16 @@ public abstract class BaseConversion {
 	 * override if you want to provide additional parameter constraints to your
 	 * implementation. If a constraint is violated throw an
 	 * {@link java.lang.IllegalArgumentException}. This Method is called in the
-	 * constructor.
+	 * constructor before {@link #doAlgorithm()}.
 	 */
 	protected void testParamConstraints() {}
+
+	/**
+	 * override if you want to init some date before doAlgorithm is called. This
+	 * method is called before {@link #doAlgorithm()} and
+	 * {@link #testParamConstraints()}
+	 */
+	protected void init() {}
 
 	protected final int		encBase;
 	protected final int		decBase;

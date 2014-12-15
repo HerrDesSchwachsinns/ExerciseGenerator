@@ -1,6 +1,10 @@
 package numeral_systems.conversion;
 
 import static numeral_systems.util.Pair.make_pair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import numeral_systems.numeral.Numeral;
 import numeral_systems.util.DigitUtils;
 import numeral_systems.util.Pair;
@@ -17,9 +21,22 @@ public class HornerConversion extends BaseConversion {
 		super(decBase, encBase, encoded);
 	}
 
+	public List<Pair<Numeral, Numeral>> partialFractionResults() {
+		return partialFractionResults;
+	}
+	public List<Pair<Numeral, Numeral>> partialIntegerResults() {
+		return partialIntegerResults;
+	}
+
+	protected void init() {
+		partialIntegerResults = new ArrayList<>();
+		partialFractionResults = new ArrayList<>();
+		recurring_index = 0;
+	}
+
 	protected void doAlgorithm() {
 		convertInteger();
-		//		convertFraction();
+		convertFraction();
 	}
 
 	/*
@@ -27,13 +44,16 @@ public class HornerConversion extends BaseConversion {
 	 * the reminders are the digits of the new base
 	 */
 	private void convertInteger() {
-		Numeral numer = encoded().clone();
+		Numeral numer = encoded().integer();
 		Numeral denom = new Numeral(decodedBase(), encodedBase());
 
 		int pos = 0;
 		while (!numer.isZero()) {
+			Numeral tmp = new Numeral(numer);
 			Pair<Numeral, Integer> divRem = divideWithRemainder(numer, denom,
 					encodedBase());
+			partialIntegerResults
+					.add(make_pair(tmp, new Numeral(divRem.first)));
 			numer = divRem.first;
 			decoded.set(pos++, divRem.second);
 		}
@@ -50,9 +70,35 @@ public class HornerConversion extends BaseConversion {
 				.toIntArray().integer()));
 	}
 
+	/*
+	 * works by repeated multiplication by decoded base
+	 * the reminders are the digits of the new base
+	 */
 	private void convertFraction() {
-		// TODO implement pay attention to repeating sequences
-		throw new UnsupportedOperationException("Not implemented yet");
+		Numeral one = new Numeral().addOne(encBase);
+		Numeral numer = encoded().fraction();
+		int pos = -1;
+		while (!numer.isZero() && !is_recurring(numer)) {
+			Numeral tmp = new Numeral(numer);
+			numer.mult(decBase, encBase);
+			partialFractionResults.add(make_pair(tmp, new Numeral(numer)));
+			decoded.set(pos--, DigitUtils.base2int(encodedBase(), numer
+					.toIntArray().integer()));
+			if (numer.compareTo(one) >= 0) {
+				numer = numer.fraction();
+			}
+		}
 	}
-
+	private boolean is_recurring(Numeral numer) {
+		for (int i = 0; i < partialFractionResults.size(); ++i) {
+			if (partialFractionResults.get(i).first.equals(numer)) {
+				recurring_index = -1 - i;
+				return true;
+			}
+		}
+		return false;
+	}
+	private List<Pair<Numeral, Numeral>>	partialIntegerResults;
+	private List<Pair<Numeral, Numeral>>	partialFractionResults;
+	private int								recurring_index;
 }

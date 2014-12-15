@@ -3,3 +3,9 @@ Wandeln Sie die Zahl ([%ENCODED%])_{[%ENCODED_BASE%]} vom [%ENCODED_BASE%]er ins
 Lösung:
 
 ([%ENCODED%])_{[%ENCODED_BASE%]} = ([%DECODED%])_{[%DECODED_BASE%]}
+
+Vorkommastellen:
+[%PARTIAL_INTEGER_RESULTS%]
+
+Nachkommastellen:
+[%PARTIAL_FRACTION_RESULTS%]

@@ -19,8 +19,9 @@ public class CliMain {
 	public static void main(String[] args) {
 		//args = new String[] { "h" };
 		//args = new String[] { "/10", "10", "3" };
-		args = new String[] { "/2", "1011011", "110" };
-		//args = new String[] { "c", "2", "10", "0.3" };
+		//args = new String[] { "/2", "1011011", "110" };
+		args = new String[] { "c", "2", "10", "15.3" };
+//		args = new String[] { "c", "10", "2", "0.11" };
 		if (args.length < 1) {
 			System.err.println("not enough parameter");
 			printHelp();
