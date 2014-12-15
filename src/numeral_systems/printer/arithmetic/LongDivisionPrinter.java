@@ -4,9 +4,11 @@ import java.util.List;
 
 import numeral_systems.arithmetic.LongDivision;
 import numeral_systems.numeral.Numeral;
+import numeral_systems.numeral.NumeralUtils;
 import numeral_systems.printer.GenericPrinter;
 import numeral_systems.printer.PrinterUtils;
 import numeral_systems.util.Pair;
+import numeral_systems.util.StringUtils;
 
 public class LongDivisionPrinter extends GenericPrinter {
 
@@ -58,19 +60,32 @@ public class LongDivisionPrinter extends GenericPrinter {
 																		+ BASE;
 	private String partialResults(List<Pair<Numeral, Integer>> partialResults,
 			Numeral divisor, int base) {
+		int maxPartResSize = partialResults
+				.stream()
+				.mapToInt(
+						p -> new Numeral(p.first).mult(p.second, base).maxPos())
+				.max().orElse(0) + 1;
+
+		String delimLine = StringUtils.repeat('-', maxPartResSize
+				+ partialResults.size() + divisor.maxPos());
+
 		StringBuilder b = new StringBuilder();
 		for (int i = 0; i < partialResults.size(); ++i) {
 			Pair<Numeral, Integer> pair = partialResults.get(i);
-			appendPartialResult(b, pair, divisor, base);
-			b.append("\n--------\n");
+			Numeral mult = new Numeral(divisor).mult(pair.second, base);
+//			int alignment = Math.max(pair.first.maxPos(), mult.maxPos());
+			int alignment = maxPartResSize;
+			String padding = StringUtils.repeat(' ', i);
+			b.append(padding + "  "
+					+ NumeralUtils.toAlignedString(pair.first, alignment, ' '));
+			b.append("\n");
+			b.append(padding + "- ");
+			b.append(NumeralUtils.toAlignedString(mult, alignment, ' '));
+
+			b.append("\n");
+			b.append(delimLine);
+			b.append("\n");
 		}
 		return b.toString();
-	}
-	private void appendPartialResult(StringBuilder b,
-			Pair<Numeral, Integer> pair, Numeral divisor, int base) {
-		b.append(pair.first);
-		b.append("\n");
-		b.append("- ");
-		b.append(new Numeral(divisor).mult(pair.second, base));
 	}
 }
