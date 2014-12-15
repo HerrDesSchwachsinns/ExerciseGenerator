@@ -284,15 +284,34 @@ public class Numeral implements Comparable<Numeral> {
 		return "(" + this.toString() + ")_" + base;
 	}
 	/**
+	 * TODO find a better name (view indicates no copy what is happening)
+	 * 
+	 * @param max
+	 * @param min
+	 * @return view of this from min pos to max pos
+	 */
+	public Numeral view(int max, int min) {
+		Numeral that = new Numeral();
+		min = Math.max(min, this.minPos());
+		max = Math.min(max, this.maxPos());
+		for (int pos = min; pos <= max; ++pos) {
+			that.set(pos, this.get(pos));
+		}
+		return that;
+	}
+	/**
 	 * 
 	 * @return clone of integer part
 	 */
 	public Numeral integer() {
-		Numeral that = new Numeral(); //TODO implement more efficient
-		for (int pos = this.maxPos(); pos >= 0; --pos) {
-			that.set(pos, this.get(pos));
-		}
-		return that;
+		return view(maxPos(), 0);
+	}
+	/**
+	 * 
+	 * @return clone of fraction part
+	 */
+	public Numeral fraction() {
+		return view(-1, minPos());
 	}
 	@Override
 	public Numeral clone() {
