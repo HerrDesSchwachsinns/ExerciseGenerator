@@ -17,11 +17,23 @@ import numeral_systems.printer.conversion.HornerConversionPrinter;
 
 public class CliMain {
 	public static void main(String[] args) {
+		//help
 		//args = new String[] { "h" };
-		//args = new String[] { "/10", "10", "3" };
+		
+		//addition
+//		args = new String[] {"+10","10.41","3.099"};
+//		args = new String[] {"+7","6.6","4.1"};
+		
+//		args = new String[] {""};
+//		args = new String[] { "/10", "10", "3" };
 		//args = new String[] { "/2", "1011011", "110" };
-		args = new String[] { "c", "2", "10", "15.3" };
+//		args = new String[] { "c", "16", "2", "0.0001001001001000" };
+//		args = new String[] { "c", "2", "10", "15.25" };
 //		args = new String[] { "c", "10", "2", "0.11" };
+		main2(args);
+	}
+	public static void main2(String[] args) {
+
 		if (args.length < 1) {
 			System.err.println("not enough parameter");
 			printHelp();

@@ -3,6 +3,8 @@ package numeral_systems.printer.conversion;
 import numeral_systems.conversion.HornerConversion;
 import numeral_systems.numeral.Numeral;
 import numeral_systems.printer.GenericPrinter;
+import numeral_systems.util.ArrayUtils;
+import numeral_systems.util.DigitUtils;
 import numeral_systems.util.Pair;
 
 public class HornerConversionPrinter extends GenericPrinter {
@@ -45,14 +47,21 @@ public class HornerConversionPrinter extends GenericPrinter {
 		StringBuilder b = new StringBuilder();
 		int pos = conv.decoded().maxPos();
 
-		for (Pair<Numeral, Numeral> p : conv.partialIntegerResults()) {
+		String decBaseInEncBase = DigitUtils.int2baseStr(conv.encodedBase(),
+				conv.decodedBase());
+
+		for (int i = 0; i < conv.partialIntegerResults().size(); ++i) {
+			Pair<Numeral, Numeral> p = conv.partialIntegerResults().get(i);
 			b.append(p.first);
 			b.append(" / ");
-			b.append(conv.decodedBase());
+			b.append(decBaseInEncBase);
 			b.append(" = ");
 			b.append(p.second);
 			b.append(" R ");
-			b.append(conv.decoded().get(pos--));
+			int d = conv.decoded().get(pos--);
+			b.append(DigitUtils.int2baseStr(conv.encodedBase(), d));
+			b.append(" -> ");
+			b.append(DigitUtils.d2c(d));
 			b.append('\n');
 		}
 		return b.toString();
@@ -61,14 +70,17 @@ public class HornerConversionPrinter extends GenericPrinter {
 		StringBuilder b = new StringBuilder();
 		int pos = -1;
 
+		String decBaseInEncBase = DigitUtils.int2baseStr(conv.encodedBase(),
+				conv.decodedBase());
+
 		for (Pair<Numeral, Numeral> p : conv.partialFractionResults()) {
 			b.append(p.first);
 			b.append(" * ");
-			b.append(conv.decodedBase());
+			b.append(decBaseInEncBase);
 			b.append(" = ");
-			b.append(p.second);
+			b.append(p.second); //TODO correct output format (base)
 			b.append(" -> ");
-			b.append(conv.decoded().get(pos--));
+			b.append(DigitUtils.d2c(conv.decoded().get(pos--)));
 			b.append('\n');
 		}
 		return b.toString();

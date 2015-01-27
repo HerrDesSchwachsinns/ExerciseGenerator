@@ -39,6 +39,22 @@ public class DigitUtils {
 		return y;
 	}
 	/**
+	 * converts a int value to a specified base representation returning a
+	 * string
+	 * 
+	 * @param B
+	 *            base, shall be valid
+	 * @param x
+	 *            value
+	 * @return x as string in base B representation
+	 */
+	public static String int2baseStr(final int B, int x) {
+		int a[] = int2base(B, x);
+		ArrayUtils.reverse(a);
+		return new String(ArrayUtils.asCharArray(a, DigitUtils::d2c));
+
+	}
+	/**
 	 * converts a base representation to an int value
 	 * 
 	 * @param B

@@ -3,6 +3,7 @@ package numeral_systems.util;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Function;
 
 public class ArrayUtils {
 
@@ -95,6 +96,20 @@ public class ArrayUtils {
 			copy[j] = original[i];
 		}
 		return copy;
+	}
+	/**
+	 * create a copy of a with every element mapped to char with mapping
+	 * function
+	 * 
+	 * @param a
+	 * @return
+	 */
+	public static char[] asCharArray(int[] a,
+			Function<Integer, Character> mapping) {
+		char[] ca = new char[a.length];
+		for (int i = 0; i < a.length; ++i)
+			ca[i] = mapping.apply(a[i]);
+		return ca;
 	}
 	/**
 	 * swaps two elements in a
