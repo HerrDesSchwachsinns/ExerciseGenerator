@@ -23,10 +23,7 @@ public class Numeral implements Comparable<Numeral> {
 	 * @param that
 	 */
 	public Numeral(Numeral that) {
-		this.digits = Arrays.copyOf(that.digits, that.digits.length);
-		this.zeroIndex = that.zeroIndex;
-		this.minIndex = that.minIndex;
-		this.maxIndex = that.maxIndex;
+		copy(that, this);
 	}
 	/**
 	 * string conversion ctor. Creates a new Numeral with value specified in str
@@ -64,9 +61,21 @@ public class Numeral implements Comparable<Numeral> {
 			digits[digits.length - 1 - i] = DigitUtils.c2d(str.charAt(i));
 		}
 	}
+	/**
+	 * int conversion ctor. Creates a new Numeral with value specified in x with
+	 * base
+	 * 
+	 * @param x
+	 * @param base
+	 * @throws IllegalArgumentException
+	 *             if base is not valid
+	 * @throws IllegalArgumentException
+	 *             if x is negative
+	 */
 	public Numeral(int x, int base) {
 		if (!DigitUtils.isValidBase(base)) throw new IllegalArgumentException(
-				"not valid base");
+				"base not valid");
+		if (x < 0) throw new IllegalArgumentException("input is negative");
 		digits = new int[DigitUtils.digits_for_base(base, x)];
 		int i = 0;
 		while (x != 0) {
@@ -79,8 +88,52 @@ public class Numeral implements Comparable<Numeral> {
 		maxIndex = digits.length - 1;
 
 	}
-	public Numeral(double x, int base) {
-		throw new UnsupportedOperationException("Not implemented yet");
+	/**
+	 * double conversion ctor. Creates a new Numeral with value specified in x
+	 * with base 10
+	 * 
+	 * @param x
+	 * @throws IllegalArgumentException
+	 *             if x is negative
+	 */
+	public Numeral(double x) {
+		if (x < 0) throw new IllegalArgumentException("input is negative");
+		//TODO test if it always gets the desired result
+		String conv = Double.toString(x);
+		int sh = 0;
+		if (conv.contains("E")) {
+			String[] split = conv.split("E");
+			conv = split[0];
+			sh = Integer.parseInt(split[1]);
+		}
+		move(new Numeral(conv), this);
+		shift(sh);
+	}
+	/**
+	 * copy contents from from to to. does not modify from
+	 * 
+	 * @param from
+	 * @param to
+	 */
+	public static void copy(Numeral from, Numeral to) {
+		to.digits = Arrays.copyOf(from.digits, from.digits.length);
+		to.zeroIndex = from.zeroIndex;
+		to.minIndex = from.minIndex;
+		to.maxIndex = from.maxIndex;
+	}
+	/**
+	 * move contents from from to to. to is a copy of from. from is left in the
+	 * configuration as if the default constructor was called
+	 * 
+	 * @param from
+	 * @param to
+	 */
+	public static void move(Numeral from, Numeral to) {
+		to.digits = from.digits;
+		to.zeroIndex = from.zeroIndex;
+		to.minIndex = from.minIndex;
+		to.maxIndex = from.maxIndex;
+		from.digits = new int[1];
 	}
 	/**
 	 * get digit at position pos. As Numeral is a infinite sequence not assigned
